@@ -104,8 +104,8 @@ const GAME_DATA = [
 ];
 
 // Configure photo reel images here (put your files in /photos)
-// Using 1.jpg through 22.jpg
-const PHOTO_REELS = Array.from({ length: 22 }, (_, i) => `photos/${i + 1}.jpg`);
+// Using 1.JPG through 22.JPG (match actual folder 'Photos' and extension .JPG for GitHub/case-sensitive hosts)
+const PHOTO_REELS = Array.from({ length: 22 }, (_, i) => `Photos/${i + 1}.JPG`);
 
 const LOVE_LETTER_TEXT = `
 Happy Birthday, My Love ❤️
