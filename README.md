@@ -1,6 +1,6 @@
 # Our Love Story - 3 Years Adventure Game
 
-A personalized interactive birthday game celebrating 3 years of love and adventures together.
+A personalized interactive birthday game celebrating 3 years of love and adventures together. Built with HTML, CSS, and JavaScript. No build step required.
 
 ## How to Play
 
@@ -32,5 +32,24 @@ A personalized interactive birthday game celebrating 3 years of love and adventu
 10. **Our Forever** - Open your heart
 
 Enjoy the journey! 💕
-# happy-birthday
-# Project-1503
+
+## Publish on GitHub
+
+1. Create a new repository on [GitHub](https://github.com/new) (e.g. `birthday-adventure-game`). Do **not** initialize with a README if this project already has one.
+
+2. From your project folder, run:
+   ```bash
+   git add .
+   git commit -m "Initial commit: birthday adventure game"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+   git push -u origin main
+   ```
+   If the remote is already set up, you only need:
+   ```bash
+   git add .
+   git commit -m "Update: full birthday game"
+   git push -u origin main
+   ```
+
+3. To host the game for free: go to your repo → **Settings** → **Pages** → set source to **Deploy from a branch** → choose branch `main` and folder `/ (root)` → Save. Your game will be at `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`.
