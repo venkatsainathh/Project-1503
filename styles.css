@@ -870,10 +870,12 @@ body::before {
 
 .film-track-down {
     animation: filmScrollDown 55s linear infinite;
+    will-change: transform;
 }
 
 .film-track-up {
     animation: filmScrollUp 55s linear infinite;
+    will-change: transform;
 }
 
 .film-photo {
@@ -883,26 +885,19 @@ body::before {
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.18);
     border: 3px solid rgba(255,255,255,0.6);
+    display: block;
+    flex-shrink: 0;
 }
 
-.film-photo-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 120px;
-    font-size: 2rem;
-    color: var(--rose-gold);
-    background: rgba(255, 255, 255, 0.5);
-}
-
+/* Seamless loop: track has 2× duplicated content; 0% and 100% show the same frame so no jump */
 @keyframes filmScrollDown {
-    0% { transform: translateY(-50%); }
-    100% { transform: translateY(0); }
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
 }
 
 @keyframes filmScrollUp {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
 }
 
 .birthday-title {
