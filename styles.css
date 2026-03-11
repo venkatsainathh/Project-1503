@@ -885,6 +885,16 @@ body::before {
     border: 3px solid rgba(255,255,255,0.6);
 }
 
+.film-photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    font-size: 2rem;
+    color: var(--rose-gold);
+    background: rgba(255, 255, 255, 0.5);
+}
+
 @keyframes filmScrollDown {
     0% { transform: translateY(-50%); }
     100% { transform: translateY(0); }

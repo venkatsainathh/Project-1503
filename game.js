@@ -103,9 +103,16 @@ const GAME_DATA = [
     }
 ];
 
-// Configure photo reel images here (put your files in /photos)
-// Using 1.JPG through 22.JPG (match actual folder 'Photos' and extension .JPG for GitHub/case-sensitive hosts)
-const PHOTO_REELS = Array.from({ length: 22 }, (_, i) => `Photos/${i + 1}.JPG`);
+// Photo reel: 1–22 in Photos/ (use exact casing for GitHub)
+const PHOTO_REELS = Array.from({ length: 22 }, (_, i) => `${i + 1}.JPG`);
+
+function getPhotoBaseUrl() {
+    const origin = window.location.origin;
+    let path = window.location.pathname || '/';
+    if (path.endsWith('.html')) path = path.slice(0, path.lastIndexOf('/') + 1);
+    else if (!path.endsWith('/')) path = path + '/';
+    return origin + path;
+}
 
 const LOVE_LETTER_TEXT = `
 Happy Birthday, My Love ❤️
@@ -1166,17 +1173,27 @@ function createPhotoReels() {
     left.innerHTML = '';
     right.innerHTML = '';
 
+    const base = getPhotoBaseUrl();
+    const photoDir = base + 'Photos/';
+
     function buildTrack(directionClass) {
         const track = document.createElement('div');
         track.className = `film-track ${directionClass}`;
 
-        // Duplicate list so scrolling looks continuous
         for (let repeat = 0; repeat < 2; repeat++) {
-            PHOTO_REELS.forEach(src => {
+            PHOTO_REELS.forEach(file => {
                 const img = document.createElement('img');
-                img.src = src;
+                img.src = photoDir + file;
                 img.alt = 'Our memory together';
                 img.className = 'film-photo';
+                img.onerror = function () {
+                    this.style.display = 'none';
+                    const place = document.createElement('span');
+                    place.className = 'film-photo film-photo-placeholder';
+                    place.textContent = '♥';
+                    place.title = 'Photo';
+                    this.parentNode.insertBefore(place, this.nextSibling);
+                };
                 track.appendChild(img);
             });
         }
