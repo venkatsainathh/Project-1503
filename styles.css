@@ -866,6 +866,7 @@ body::before {
 .film-track {
     display: flex;
     flex-direction: column;
+    pointer-events: auto;
 }
 
 .film-track-down {
@@ -887,6 +888,7 @@ body::before {
     border: 3px solid rgba(255,255,255,0.6);
     display: block;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 /* Seamless loop: track has 2× duplicated content; 0% and 100% show the same frame so no jump */
@@ -1052,6 +1054,50 @@ body::before {
     font-size: 1.4rem;
     cursor: pointer;
     color: var(--rose-gold-dark);
+}
+
+/* Photo overlay (film strip image viewer) */
+.photo-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1120;
+}
+
+.photo-modal {
+    background: #ffffff;
+    padding: 1rem 1.5rem 1.25rem;
+    border-radius: 16px;
+    max-width: 80vw;
+    max-height: 80vh;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    position: relative;
+}
+
+.photo-full {
+    max-width: 76vw;
+    max-height: 70vh;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.photo-close {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.6rem;
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
 }
 
 @keyframes letterBounce {

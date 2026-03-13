@@ -104,8 +104,8 @@ const GAME_DATA = [
 ];
 
 // Configure photo reel images here (put your files in /photos)
-// Using 1.jpg through 22.jpg
-const PHOTO_REELS = Array.from({ length: 22 }, (_, i) => `Photos/${i + 1}.JPG`);
+// Using 1.JPG through 33.JPG
+const PHOTO_REELS = Array.from({ length: 33 }, (_, i) => `Photos/${i + 1}.JPG`);
 
 const LOVE_LETTER_TEXT = `
 Happy Birthday, My Love ❤️
@@ -1158,6 +1158,18 @@ function createBirthdayHearts() {
     }
 }
 
+function pausePhotoReels() {
+    document.querySelectorAll('.film-track').forEach(track => {
+        track.style.animationPlayState = 'paused';
+    });
+}
+
+function resumePhotoReels() {
+    document.querySelectorAll('.film-track').forEach(track => {
+        track.style.animationPlayState = 'running';
+    });
+}
+
 function createPhotoReels() {
     const left = document.getElementById('left-film-strip');
     const right = document.getElementById('right-film-strip');
@@ -1177,6 +1189,9 @@ function createPhotoReels() {
                 img.src = src;
                 img.alt = 'Our memory together';
                 img.className = 'film-photo';
+                img.addEventListener('click', () => {
+                    showPhotoOverlay(src);
+                });
                 track.appendChild(img);
             });
         }
@@ -1211,6 +1226,29 @@ function initLoveLetter() {
     });
 }
 
+function initPhotoOverlay() {
+    const overlay = document.getElementById('photo-overlay');
+    const img = document.getElementById('photo-full');
+    const closeBtn = document.getElementById('photo-close');
+    if (!overlay || !img || !closeBtn) return;
+
+    function close() {
+        overlay.style.display = 'none';
+        resumePhotoReels();
+    }
+
+    closeBtn.onclick = close;
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+    });
+
+    window.showPhotoOverlay = function (src) {
+        img.src = src;
+        pausePhotoReels();
+        overlay.style.display = 'flex';
+    };
+}
+
 // Init
 document.getElementById('start-btn').addEventListener('click', () => {
     showScreen('intro-screen');
@@ -1223,3 +1261,4 @@ document.getElementById('intro-start-btn').addEventListener('click', () => {
 });
 
 createFloatingHearts();
+initPhotoOverlay();
