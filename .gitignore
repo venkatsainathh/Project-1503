@@ -13,9 +13,6 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Local backups (resized originals kept out of repo)
-*_original_big.JPG
-
 # Optional (uncomment if you use them)
 # node_modules/
 # .env

@@ -104,8 +104,14 @@ const GAME_DATA = [
 ];
 
 // Configure photo reel images here (put your files in /photos)
-// Using 1.JPG through 36.JPG
-const PHOTO_REELS = Array.from({ length: 36 }, (_, i) => `Photos/${i + 1}.JPG`);
+// Using 1.JPG through 36.JPG (paths work on GitHub Pages and locally)
+function getPhotoBase() {
+    if (typeof window === 'undefined' || !window.location) return '';
+    const path = window.location.pathname || '';
+    const dir = path.replace(/\/[^/]*$/, '/');
+    return dir;
+}
+const PHOTO_REELS = Array.from({ length: 36 }, (_, i) => getPhotoBase() + `Photos/${i + 1}.JPG`);
 
 const LOVE_LETTER_TEXT = `
 Happy Birthday, My Love ❤️
@@ -1186,12 +1192,17 @@ function createPhotoReels() {
         for (let repeat = 0; repeat < 2; repeat++) {
             PHOTO_REELS.forEach(src => {
                 const img = document.createElement('img');
-                img.src = src;
                 img.alt = 'Our memory together';
                 img.className = 'film-photo';
                 img.addEventListener('click', () => {
                     showPhotoOverlay(src);
                 });
+                img.onerror = function () {
+                    this.onerror = null;
+                    const fallback = src.replace(/\.JPG$/i, '.jpg');
+                    if (fallback !== src) this.src = fallback;
+                };
+                img.src = src;
                 track.appendChild(img);
             });
         }
