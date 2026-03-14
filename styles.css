@@ -870,14 +870,14 @@ body::before {
 }
 
 .film-track-down {
-    animation: filmScrollDown 55s linear infinite;
+    animation: filmScrollDown 85s linear infinite;
     animation-delay: 2s;
     animation-fill-mode: both;
     will-change: transform;
 }
 
 .film-track-up {
-    animation: filmScrollUp 55s linear infinite;
+    animation: filmScrollUp 85s linear infinite;
     animation-delay: 2s;
     animation-fill-mode: both;
     will-change: transform;
